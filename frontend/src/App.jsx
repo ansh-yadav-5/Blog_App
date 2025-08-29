@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import Home from "./pages/Home";
+import Post from "./pages/post";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import UserLayout from "./Layouts/UserLayout";
+import AdminLayout from "./Layouts/AdminLayout";
+import Dashboard from "./pages/Admin/Dashboard";
+import Addpost from "./pages/Admin/Addpost";
+import User from "./pages/Admin/User";
+import Allpost from "./pages/Admin/Allpost";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  return(
+  <>
+  <BrowserRouter>
+  <Routes>
+    <Route path='/' element={<UserLayout/>}>
+    <Route index element={<Home/>}/>
+    <Route path='post/:id' element={<Post/>}></Route>
+    
+    <Route path='profile/:id' element={<Profile/>}></Route>
+    </Route>
+    <Route path='/dashboard' element={<AdminLayout/>}>
+      <Route index element={<Dashboard/>}/>
+      <Route path='addpost' element={<Addpost/>}/>
+      <Route path='users' element={<User/>}/>
+      <Route path='allposts' element={<Allpost/>}/>
+  
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </Route>
+    <Route path='/login' element={<Login/>}></Route>
+    <Route path='/register' element={<Register/>}></Route>
+    
+
+
+
+
+  </Routes>
+  
+  </BrowserRouter>
+  </>
   )
 }
-
-export default App
